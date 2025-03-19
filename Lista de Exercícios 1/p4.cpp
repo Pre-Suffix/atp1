@@ -4,7 +4,7 @@
 
 int main() {
 
-    int x, y, t;
+    int x, y;
 
     printf("Coloque o valor de x: ");
     scanf("%d", &x);
@@ -12,9 +12,10 @@ int main() {
     printf("Coloque o valor de y: ");
     scanf("%d", &y);
 
-    t = x;
-    x = y;
-    y = t;
+    x += y;
+    y -= x;
+    x += y;
+    y *= -1;
 
     printf("x: %d\ny: %d\n", x, y);
 
