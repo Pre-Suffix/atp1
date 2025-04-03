@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int swap(float *a, float *b) { // inverte os dois valores por ponteiros
-    float t;
-
-    t = *a;
+void swap(float *a, float *b) { // inverte os dois valores por ponteiros
+    
+    float t = *a;
     *a = *b;
     *b = t;
-
-    return 0;
+    
+    free(&t);
 }
 
 int main() {
