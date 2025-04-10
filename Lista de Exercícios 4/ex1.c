@@ -11,7 +11,8 @@ int main(void) {
     printf("Digite um numero inteiro: ");
 
     // c) Ler um inteiro do teclado e armazenar o valor digitado na variável inteira a.
-    scanf("%d", &c);
+    int a;
+    scanf("%d", &a);
 
     // d) Se o número não for igual a 7, exibir "A variável número não é igual a 7".
     printf(c != 7 ? "A variavel numero nao e igual a 7.\n" : "");
