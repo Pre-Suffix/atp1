@@ -1,10 +1,9 @@
 // Exercício n • 
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+
+using namespace std;
 
 int main() {
-
-    getchar(); // pausa a execução
 
     return 0;
 }
