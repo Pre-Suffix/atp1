@@ -3,30 +3,27 @@
 
 using namespace std;
 
-void inverter(int *x, int *y) {
-    int t = *x;
-    *x = *y;
-    *y = t;
+void inverter(int *start, int *end) {
+    int lim = (end - start - 1) / 2;
+    for(int i = 0; i <= lim; ++i) {
+        swap(*(start + i), *(end - i));
+    }
 }
 
 int main() {
-    int T = 5;
-    int A[T] = {1, 2, 3, 4, 5};
+    int T = 6;
+    int A[T] = {1, 2, 3, 4, 5, 6};
     
     // Imprima a array
     cout << "{ ";
-    for(int i = 0; i < 5; ++i) cout << A[i] << (i == (T - 1) ? " }\n" : ", ");
+    for(int i = 0; i < T; ++i) cout << A[i] << (i == (T - 1) ? " }\n" : ", ");
 
-    // Inverta 2 e 4
-    cout << "Invertendo 2 e 4...\n";
-    inverter(&A[1], &A[3]);
+    // Inverta a array
+    inverter(&A[0], &A[T - 1]);
 
     // Imprima a array
     cout << "{ ";
-    for(int i = 0; i < 5; ++i) cout << A[i] << (i == (T - 1) ? " }\n" : ", ");
+    for(int i = 0; i < T; ++i) cout << A[i] << (i == (T - 1) ? " }\n" : ", ");
 
     return 0;
 }
-
-// Nota: a biblioteca padrão <algorithm> do C++ inclui a função swap() que faz o mesmo papel. Usando-a, a chamada fica assim:
-// swap(A[1], A[3]);
