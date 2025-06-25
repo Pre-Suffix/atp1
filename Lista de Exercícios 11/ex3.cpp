@@ -10,45 +10,58 @@
 
 using namespace std;
 
-set<int> numerosSorteados;
+// Vetor de inteiros para verificar se o número já foi sorteado
+int numerosSorteados[100] = { 0 };
 
+// Sorteador de números únicos
 int aleatorio(int min, int max) {
+    // Gere um número baseado na função rand();
     int num = (rand() % (max - min + 1)) + min;
-    int s = numerosSorteados.size();
 
-    numerosSorteados.insert(num);
-
-    if(numerosSorteados.size() == s) {
+    // Se o número obtido já foi sorteado, sorteie outro.
+    if(numerosSorteados[num] == 1) {
         return aleatorio(min, max);
     }
 
+    // Defina o número obtido como sorteado
+    numerosSorteados[num] = 1;
+    
     return num;
 }
 
 int main() {
-    srand(time(0));
+    srand(time(0)); // Defina a semente do gerador de números para o tempo atual. (Melhora a aleatoriedade)
 
-    FILE *bingoCSV = fopen("bingo.csv", "w");
+    // Abra um arquivo "bingo.csv" no modo escrita. Caso não abra, pare a execução.
+    FILE *bingoCSV = fopen("bingo.csv", "w"); 
     if(!bingoCSV) return 1;
 
+    // Prepare o arquivo definindo as colunas
     fputs("B,I,N,G,O\n", bingoCSV);
 
+    // Para todos os 25 quadrados da cartela, preencha o valor.
     for(int i = 0; i < 25; ++i) {
+        // Se não estiver na primeira coluna, insira uma vírgula antes do número
         if(i % 5 != 0) fputs(",", bingoCSV);
 
+        // Se for o quadrado do meio, preencha com "FREE" e pule para o próximo valor
         if(i == 12) {
-            fprintf(bingoCSV, "FREE");
+            fputs("FREE", bingoCSV);
             continue;
         }
 
+        // Calcule a coluna e obtenha um número aleatório baseando-se nos limites da coluna
         int coluna = (i % 5) * 15;
         int numero = aleatorio(coluna + 1, coluna + 15);
 
+        // Insira o número no quadrado
         fprintf(bingoCSV, "%d", numero);
 
+        // Se estiver na última coluna, pule para a próxima linha.
         if((i + 1) % 5 == 0) fputs("\n", bingoCSV);
     }
 
+    // Feche o arquivo
     fclose(bingoCSV);
 
     return 0;
