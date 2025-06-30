@@ -81,7 +81,7 @@ int main() {
     char menuItem[100];
     int i = 0;
     for(; c != EOF; ++i) {
-        if(c == '\n') {
+        if(c == '\n' || i == 99) {
             menuItem[i] = '\0';
             i = -1;
             menu->adicionar(menuItem);
